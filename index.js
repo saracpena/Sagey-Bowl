@@ -28,7 +28,11 @@ const API_URL =
 let puppies = [];
 let selectedPuppy = null;
 
-const app = document.querySelector("#app");
+const puppyList = document.querySelector("#puppyList");
+const selectedPupDiv = document.querySelector("#selectedPupDiv");
+const puppyForm = document.querySelector("#puppyForm");
+
+// const app = document.querySelector("#app");
 
 /**
  * Fetches all players from the API.
@@ -207,7 +211,7 @@ app.addEventListener("click", async (event) => {
     const playerId = puppyDiv.dataset.playerId;
     await fetchSinglePlayer(playerId);
   }});
-  
+
 app.addEventListener("click", async (event) => {
   if(event.target.closest(".puppy")) {
     const puppyDiv = event.target.closest(".puppy");
