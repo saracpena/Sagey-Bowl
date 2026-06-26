@@ -159,13 +159,19 @@ const render = () => {
       </section>
 
       <section>
-        <h2></h2>
+        <h2>Puppy List</h2>
 
-        <div>
-          ---mapping here---
-            return `
-              <>
-            `
+        <div id="puppyList">
+          ${puppies
+            .map((puppy) => {
+              return `
+                <div class="puppy" data-playerid="${puppy.id}">
+                <h3>${puppy.name}</h3>
+                <img src=${puppy.imageUrl}" alt="${puppy.name}"/>
+                </div>
+            `;
+            })
+              .join("")}
         </div>
       </section>
     </main>
