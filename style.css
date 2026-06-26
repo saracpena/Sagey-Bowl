@@ -20,14 +20,28 @@ section {
 }
 
 #puppyList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Wider screen
+@media (max-width: 1200px) {
+    #puppyList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Narrow */
+@media (max-width: 700px) {
+    #puppyList {
+        grid-template-columns: 1fr;
+    }
 }
 
 .puppy {
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
     padding: 10px;
     cursor: pointer;
     text-align: center;
