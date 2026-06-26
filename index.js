@@ -47,6 +47,7 @@ const app = document.querySelector("#app");
  */
 const render = () => {
   app.innerHTML = `
+
     <h1>Puppy Bowl</h1>
     
     <main>
@@ -244,6 +245,19 @@ app.addEventListener("submit", async (event) => {
 app.addEventListener("click", async (event) => {
   if (event.target.id === "deleteButton") {
     const playerId = event.target.dataset.playerid;
+
+    const confirmed = confirm(
+  `🐶 Are you sure you want to delete this puppy?
+
+This action cannot be undone.
+
+"I'll be lost forever..." 🥺`
+);
+
+if (!confirmed) {
+      return;
+    }
+
     await removePlayer(playerId);
   }
 });
