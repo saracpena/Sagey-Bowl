@@ -18,7 +18,7 @@
 //This is optional. if you do not want to, skip this and move on.
 
 const API_URL = 
-  "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
+"https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
 
 /////////////////////////////
 /*This looks like a good place to declare any state or global variables you might need*/
@@ -28,9 +28,82 @@ const API_URL =
 let puppies = [];
 let selectedPuppy = null;
 
-const puppyList = document.querySelector("#puppyList");
-const selectedPupDiv = document.querySelector("#selectedPupDiv");
-const puppyForm = document.querySelector("#puppyForm");
+/**
+ * Updates html to display a list of all players or a single player page.
+ *
+ * If there are no players, a corresponding message is displayed instead.
+ *
+ * Each player in the all player list is displayed with the following information:
+ * - name
+ * - image (with alt text of the player's name)
+ *
+ * Additionally, for each player we should be able to:
+ * - See details of a single player. The page should show
+ *    specific details about the player clicked such as: name, id, breed, status, image, and team or unassigned if no team
+ * - Remove from roster. When a button is clicked, should remove the player
+ *    from the database and our current view without having to refresh
+ *
+ */
+const render = () => {
+  app.innerHTML = `
+    <h1>Puppy Bowl</h1>
+    
+    <main>
+      <section>
+        <h2>Add a Puppy</h2>
+
+        <form id="puppyForm">
+          <input name="name" placeholder="Name" required/>
+          <input name="breed" placeholder="Breed" required/>
+          <button>Add Puppy</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Puppy List</h2>
+
+        <div id="puppyList">
+          ${puppies
+            .map((puppy) => {
+              return `
+                <div class="puppy" data-playerid="${puppy.id}">
+                <h3>${puppy.name}</h3>
+                <img src=${puppy.imageUrl}" alt="${puppy.name}"/>
+                </div>
+            `;
+            })
+              .join("")}
+        </div>
+      </section>
+
+      <section>
+            <h2>Puppy Details</h2>
+            <div id="puppyDetails">
+              ${
+                !selectedPuppy
+                  ? `<p>Please select a puppy to see more details</p>`
+                  : `
+                    <h3>${selectedPuppy.name}</h3>
+                    <p>${selectedPuppy.id}</p>
+                    <p>${selectedPuppy.breed}</p>
+                    <p>${selectedPuppy.status}</p>
+                    <p><Team: ${
+                  selectedPuppy.team ? selectedPuppy.team.name : "Unassigned"
+                    }</p>
+                    <img src="${selectedPuppy.imageUrl}" alt="${selectedPuppy.name}"/>
+
+                    <br />
+
+                    <button id="deleteButton" data-playerid="${selectedPuppy.id}">
+                    Delete Puppy
+                    </button>
+                  `
+              }
+            </div>
+      </section>
+    </main>
+  `;
+};
 
 // const app = document.querySelector("#app");
 
@@ -128,82 +201,6 @@ const removePlayer = async (playerId) => {
 }
 };
 
-/**
- * Updates html to display a list of all players or a single player page.
- *
- * If there are no players, a corresponding message is displayed instead.
- *
- * Each player in the all player list is displayed with the following information:
- * - name
- * - image (with alt text of the player's name)
- *
- * Additionally, for each player we should be able to:
- * - See details of a single player. The page should show
- *    specific details about the player clicked such as: name, id, breed, status, image, and team or unassigned if no team
- * - Remove from roster. When a button is clicked, should remove the player
- *    from the database and our current view without having to refresh
- *
- */
-const render = () => {
-  app.innerHTML = `
-    <h1>Puppy Bowl</h1>
-    
-    <main>
-      <section>
-        <h2>Add a Puppy</h2>
-
-        <form id="puppyForm">
-          <input name="name" placeholder="Name" required/>
-          <input name="breed" placeholder="Breed" required/>
-          <button>Add Puppy</button>
-        </form>
-      </section>
-
-      <section>
-        <h2>Puppy List</h2>
-
-        <div id="puppyList">
-          ${puppies
-            .map((puppy) => {
-              return `
-                <div class="puppy" data-playerid="${puppy.id}">
-                <h3>${puppy.name}</h3>
-                <img src=${puppy.imageUrl}" alt="${puppy.name}"/>
-                </div>
-            `;
-            })
-              .join("")}
-        </div>
-      </section>
-
-      <section>
-            <h2>Puppy Details</h2>
-            <div id="puppyDetails">
-              ${
-                !selectedPuppy
-                  ? `<p>Please select a puppy to see more details</p>`
-                  : `
-                    <h3>${selectedPuppy.name}</h3>
-                    <p>${selectedPuppy.id}</p>
-                    <p>${selectedPuppy.breed}</p>
-                    <p>${selectedPuppy.status}</p>
-                    <p><Team: ${
-                  selectedPuppy.team ? selectedPuppy.team.name : "Unassigned"
-                    }</p>
-                    <img src="${selectedPuppy.imageUrl}" alt="${selectedPuppy.name}"/>
-
-                    <br />
-
-                    <button id="deleteButton" data-playerid="${selectedPuppy.id}">
-                    Delete Puppy
-                    </button>
-                  `
-              }
-            </div>
-      </section>
-    </main>
-  `;
-};
 
 app.addEventListener("click", async (event) => {
   if(event.target.closest(".puppy")) {
