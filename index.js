@@ -186,14 +186,22 @@ const render = () => {
                     <p>${selectedPuppy.id}</p>
                     <p>${selectedPuppy.breed}</p>
                     <p>${selectedPuppy.status}</p>
-                    <p>${selectedPuppy.id}</p>
+                    <p><Team: ${
+                  selectedPuppy.team ? selectedPuppy.team.name : "Unassigned"
+                    }</p>
                     <img src="${selectedPuppy.imageUrl}" alt="${selectedPuppy.name}"/>
+
+                    <br />
+
+                    <button id="deleteButton" data-playerid="${selectedPuppy.id}">
+                    Delete Puppy
+                    </button>
                   `
               }
             </div>
       </section>
     </main>
-  `
+  `;
 };
 
 /**
