@@ -174,6 +174,23 @@ const render = () => {
               .join("")}
         </div>
       </section>
+
+      <section>
+            <h2>Puppy Details</h2>
+            <div id="puppyDetails">
+              ${
+                !selectedPuppy
+                  ? `<p>Please select a puppy to see more details</p>`
+                  : `
+                    <h3>${selectedPuppy.name}</h3>
+                    <p>${selectedPuppy.id}</p>
+                    <p>${selectedPuppy.breed}</p>
+                    <p>${selectedPuppy.status}</p>
+                    <p>${selectedPuppy.id}</p>
+                  `
+              }
+            </div>
+      </section>
     </main>
   `
 };
