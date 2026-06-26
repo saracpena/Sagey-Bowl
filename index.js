@@ -14,9 +14,6 @@
 //    6. Render again
 
 
-
-
-
 //If you would like to, you can create a variable to store the API_URL here.
 //This is optional. if you do not want to, skip this and move on.
 
@@ -204,12 +201,28 @@ const render = () => {
   `;
 };
 
+app.addEventListener("click", async (event) => {
+  if(event.target.closest(".puppy")) {
+    const puppyDiv = event.target.closest(".puppy");
+    const playerId = puppyDiv.dataset.playerId;
+    await fetchSinglePlayer(playerId);
+  }});
+  
+app.addEventListener("click", async (event) => {
+  if(event.target.closest(".puppy")) {
+    const puppyDiv = event.target.closest(".puppy");
+    const playerId = puppyDiv.dataset.playerId;
+    await fetchSinglePlayer(playerId);
+  }});
+
+
+
 /**
  * Initializes the app by calling render
  * HOWEVER....
  */
 const init = async () => {
-  //Before we render, what do we always need?
+  await fetchAllPlayers();
 
   render();
 };
