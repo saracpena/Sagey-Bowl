@@ -144,7 +144,23 @@ const removePlayer = async (playerId) => {
  *
  */
 const render = () => {
-  // TODO
+  app.innerHTML = `
+  <h1>Puppy Bowl</h1>
+  
+  <main>
+    <section>
+      <h2>Add a Puppy</h2>
+
+      <form>
+        <input />
+        <input />
+        <input />
+      </form>
+    </section>
+
+    
+  </main>
+  `
 };
 
 /**
