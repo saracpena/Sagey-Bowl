@@ -26,6 +26,7 @@ const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players";
 let puppies = [];
 let selectedPuppy = null;
 const app = document.querySelector("#app");
+let message = "";
 
 /**
  * Updates html to display a list of all players or a single player page.
@@ -94,15 +95,15 @@ const render = () => {
               ${
                 !selectedPuppy
                   ? `<div class="placeholder">
-  <h3>🐶 Welcome!</h3>
-  <p>Select a puppy to learn more about them.</p>
-</div>`
+                        <h3>🐶 Welcome!</h3>
+                        <p>Select a puppy to learn more about them.</p>
+                      </div>`
                   : `
-                    <h3>Name: ${selectedPuppy.name}</h3>
-                    <p>ID: ${selectedPuppy.id}</p>
-                    <p>Breed: ${selectedPuppy.breed}</p>
-                    <p> Status: ${selectedPuppy.status}</p>
-                    <p>Team: ${
+                    <h3><strong>Name:</strong> ${selectedPuppy.name}</h3>
+                    <p><strong>ID:</strong> ${selectedPuppy.id}</p>
+                    <p><strong>Breed:</strong> ${selectedPuppy.breed}</p>
+                    <p><strong>Status:</strong> ${selectedPuppy.status}</p>
+                    <p><strong>Team:</strong> ${
                       selectedPuppy.team
                         ? selectedPuppy.team.name
                         : "Unassigned"
@@ -118,7 +119,9 @@ const render = () => {
               }
             </div>
       </section>
+      
     </main>
+    ${message ? `<div id="snackbar">${message}</div>` : ""}
   `;
 };
 
@@ -184,6 +187,13 @@ const addNewPlayer = async (newPlayer) => {
       body: JSON.stringify(newPlayer),
     });
     await fetchAllPlayers();
+    message = `Hey! Check it out, you just added your puppy, <strong>"${newPlayer.name}"</strong> to the list!`;
+    render();
+
+    setTimeout(() => {
+      message = "";
+      render();
+    }, 5000);
   } catch (error) {
     console.log(error);
   }

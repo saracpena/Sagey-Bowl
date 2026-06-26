@@ -90,6 +90,16 @@ button {
   cursor: pointer;
 }
 
+#snackbar {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #333;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 10px;
+}
+
 /* medium screen: form + details top, list full width below */
 @media (max-width: 1100px) {
   main {
