@@ -62,7 +62,7 @@ const fetchAllPlayers = async () => {
 const fetchSinglePlayer = async (playerId) => {
   try {
     const response = await fetch (`${API_URL}/${playerId}`);
-    const { data } = await.response.json
+    const { data } = await response.json
     selectedPuppy = data.player;
     render();
   } catch (error) {
