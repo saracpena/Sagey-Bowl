@@ -25,7 +25,7 @@ section {
     gap: 20px;
 }
 
-/* Wider screen
+/* Wider screen */
 @media (max-width: 1200px) {
     #puppyList {
         grid-template-columns: repeat(2, 1fr);
