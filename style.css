@@ -2,4 +2,52 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Bahnschrift, Arial, sans-serif;
+}
+
+body {
+    margin: 20px;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+section {
+    flex: 1;
+}
+
+#puppyList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.puppy {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    width: 180px;
+}
+.puppy img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+#puppyDetails img {
+  width: 250px;
+  height: auto;
+  border-radius: 8px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
 }

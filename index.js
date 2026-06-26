@@ -88,7 +88,7 @@ const render = () => {
                     <p>${selectedPuppy.id}</p>
                     <p>${selectedPuppy.breed}</p>
                     <p>${selectedPuppy.status}</p>
-                    <p><Team: ${
+                    <p>Team: ${
                   selectedPuppy.team ? selectedPuppy.team.name : "Unassigned"
                     }</p>
                     <img src="${selectedPuppy.imageUrl}" alt="${selectedPuppy.name}"/>
@@ -204,9 +204,8 @@ const removePlayer = async (playerId) => {
 
 // CLICK A PUPPY TO VIEW DETAILS
 app.addEventListener("click", async (event) => {
-  if (event.target.classList.contains("puppy")) {
-    const puppyDiv = event.target.classList.contains("puppy");
-    const playerId = puppyDiv.dataset.playerid;
+  if (event.target.classList.contains("puppyName")) {
+    const playerId = event.target.dataset.playerid;
     await fetchSinglePlayer(playerId);
   }
 });
