@@ -89,7 +89,10 @@ const render = () => {
             <div id="puppyDetails">
               ${
                 !selectedPuppy
-                  ? `<p>Please select a puppy to see more details</p>`
+                  ? `<div class="placeholder">
+  <h3>🐶 Welcome!</h3>
+  <p>Select a puppy to learn more about them.</p>
+</div>`
                   : `
                     <h3>${selectedPuppy.name}</h3>
                     <p>${selectedPuppy.id}</p>
@@ -251,9 +254,9 @@ app.addEventListener("click", async (event) => {
  * Initializes the app by calling render
  * HOWEVER....
  */
+//! YOU HAVE TO FETCH DATA BEFORE RENDERING OR YOU WILL GET NOTHING!
 const init = async () => {
   await fetchAllPlayers();
-
   render();
 };
 

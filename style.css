@@ -1,82 +1,107 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-family: Bahnschrift, Arial, sans-serif;
 }
 
 body {
-    margin: 20px;
+    margin: 0;
+    padding: 24px;
+    background: #f4f1ea;
+}
+
+h1 {
+  margin-bottom: 20px;
 }
 
 main {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    align-items: start;
 }
 
-/* Left column */
 main section:first-child {
+  grid-column: 1 / -1;
+}
+
+main section:nth-child(3) {
+  position: sticky;
+  top: 24px;
+}
+
+#puppyDetails {
     position: sticky;
     top: 20px;
 }
 
-/* Right column */
-main section:last-child {
-    position: sticky;
-    top: 20px;
-}
-section {
-    flex: 1;
-}
-
-.sectionTitle {
-    text-align: center;
+#addPuppySection {
+    grid-column: 1 / -1;
 }
 
 #puppyList {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-/* Wider screen */
-@media (max-width: 1200px) {
-    #puppyList {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Narrow */
-@media (max-width: 700px) {
-    #puppyList {
-        grid-template-columns: 1fr;
-    }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 
 .puppy {
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-    text-align: center;
-    width: 180px;
+  text-align: center;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background: #fffaf0;
 }
+
 .puppy img {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  max-width: 180px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 #puppyDetails img {
-  width: 250px;
-  height: auto;
-  border-radius: 8px;
+  width: 100%;
+  max-width: 260px;
+  border-radius: 14px;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
 }
 
 button {
-  margin-top: 10px;
-  padding: 8px 14px;
+  padding: 10px 16px;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+main section:first-child,
+main section:last-child {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 1000px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  #puppyList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main section:first-child,
+  main section:last-child {
+    position: static;
+  }
+}
+
+@media (max-width: 650px) {
+  #puppyList {
+    grid-template-columns: 1fr;
+  }
 }
