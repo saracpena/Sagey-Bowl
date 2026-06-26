@@ -13,12 +13,10 @@
 //    ↓
 //    6. Render again
 
-
 //If you would like to, you can create a variable to store the API_URL here.
 //This is optional. if you do not want to, skip this and move on.
 
-const API_URL = 
-"https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
+const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players";
 
 /////////////////////////////
 /*This looks like a good place to declare any state or global variables you might need*/
@@ -100,7 +98,9 @@ const render = () => {
                     <p>${selectedPuppy.breed}</p>
                     <p>${selectedPuppy.status}</p>
                     <p>Team: ${
-                  selectedPuppy.team ? selectedPuppy.team.name : "Unassigned"
+                      selectedPuppy.team
+                        ? selectedPuppy.team.name
+                        : "Unassigned"
                     }</p>
                     <img src="${selectedPuppy.imageUrl}" alt="${selectedPuppy.name}"/>
 
@@ -117,7 +117,6 @@ const render = () => {
   `;
 };
 
-
 /**
  * Fetches all players from the API.
  * This function should not be doing any rendering
@@ -125,7 +124,7 @@ const render = () => {
  */
 const fetchAllPlayers = async () => {
   try {
-    const response = await fetch (API_URL);
+    const response = await fetch(API_URL);
     const { data } = await response.json();
     puppies = data.players;
     render();
@@ -146,7 +145,7 @@ const fetchAllPlayers = async () => {
  */
 const fetchSinglePlayer = async (playerId) => {
   try {
-    const response = await fetch (`${API_URL}/${playerId}`);
+    const response = await fetch(`${API_URL}/${playerId}`);
     const { data } = await response.json();
     selectedPuppy = data.player;
     render();
@@ -172,14 +171,13 @@ const fetchSinglePlayer = async (playerId) => {
 
 const addNewPlayer = async (newPlayer) => {
   try {
-    await fetch (API_URL,
-      {
-        method:"POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPlayer),
-      });
+    await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPlayer),
+    });
     await fetchAllPlayers();
   } catch (error) {
     console.log(error);
@@ -199,19 +197,15 @@ const addNewPlayer = async (newPlayer) => {
 
 const removePlayer = async (playerId) => {
   try {
-    await fetch (
-      `${API_URL}/${playerId}`, 
-      {
-        method: "DELETE",
-    }
-  );
-  selectedPuppy = null;
-  await fetchAllPlayers();
-} catch (error) {
-  console.log(error);
-}
+    await fetch(`${API_URL}/${playerId}`, {
+      method: "DELETE",
+    });
+    selectedPuppy = null;
+    await fetchAllPlayers();
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 
 // CLICK A PUPPY TO VIEW DETAILS
 app.addEventListener("click", async (event) => {
@@ -247,22 +241,20 @@ app.addEventListener("click", async (event) => {
     const playerId = event.target.dataset.playerid;
 
     const confirmed = confirm(
-  `🐶 Are you sure you want to delete this puppy?
+      `🐶 Are you sure you want to delete this puppy?
 
 This action cannot be undone.
 
-"I'll be lost forever..." 🥺`
-);
+"I'll be lost forever..." 🥺`,
+    );
 
-if (!confirmed) {
+    if (!confirmed) {
       return;
     }
 
     await removePlayer(playerId);
   }
 });
-
-
 
 /**
  * Initializes the app by calling render
