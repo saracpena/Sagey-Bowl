@@ -63,18 +63,25 @@ const render = () => {
       <section>
         <h2>Puppy List</h2>
 
-        <div id="puppyList">
-          ${puppies
-            .map((puppy) => {
-              return `
-                <div class="puppy" data-playerid="${puppy.id}">
-                <h3>${puppy.name}</h3>
-                <img src="${puppy.imageUrl}" alt="${puppy.name}"/>
-                </div>
-            `;
-            })
+          <div id="puppyList">
+            ${puppies
+              .map((puppy) => {
+                return `
+                  <div class="puppy">
+                    <h3 class="puppyName" data-playerid="${puppy.id}">
+                      ${puppy.name}
+                    </h3>
+                    <img 
+                      class="puppyImg" 
+                      data-playerid="${puppy.id}" 
+                      src="${puppy.imageUrl}" 
+                      alt="${puppy.name}"
+                    />
+                  </div>
+                `;
+              })
               .join("")}
-        </div>
+          </div>
       </section>
 
       <section>
@@ -204,8 +211,12 @@ const removePlayer = async (playerId) => {
 
 // CLICK A PUPPY TO VIEW DETAILS
 app.addEventListener("click", async (event) => {
-  if (event.target.classList.contains("puppyName")) {
+  if (
+    event.target.classList.contains("puppyName") ||
+    event.target.classList.contains("puppyImg")
+  ) {
     const playerId = event.target.dataset.playerid;
+    console.log("puppy clicked", playerId);
     await fetchSinglePlayer(playerId);
   }
 });
