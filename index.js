@@ -27,6 +27,7 @@ const API_URL =
 
 let puppies = [];
 let selectedPuppy = null;
+const app = document.querySelector("#app");
 
 /**
  * Updates html to display a list of all players or a single player page.
@@ -68,7 +69,7 @@ const render = () => {
               return `
                 <div class="puppy" data-playerid="${puppy.id}">
                 <h3>${puppy.name}</h3>
-                <img src=${puppy.imageUrl}" alt="${puppy.name}"/>
+                <img src="${puppy.imageUrl}" alt="${puppy.name}"/>
                 </div>
             `;
             })
@@ -105,7 +106,6 @@ const render = () => {
   `;
 };
 
-// const app = document.querySelector("#app");
 
 /**
  * Fetches all players from the API.
@@ -136,7 +136,7 @@ const fetchAllPlayers = async () => {
 const fetchSinglePlayer = async (playerId) => {
   try {
     const response = await fetch (`${API_URL}/${playerId}`);
-    const { data } = await response.json
+    const { data } = await response.json();
     selectedPuppy = data.player;
     render();
   } catch (error) {
@@ -202,19 +202,38 @@ const removePlayer = async (playerId) => {
 };
 
 
+// CLICK A PUPPY TO VIEW DETAILS
 app.addEventListener("click", async (event) => {
-  if(event.target.closest(".puppy")) {
-    const puppyDiv = event.target.closest(".puppy");
-    const playerId = puppyDiv.dataset.playerId;
+  if (event.target.contains(".puppy")) {
+    const puppyDiv = event.target.contains(".puppy");
+    const playerId = puppyDiv.dataset.playerid;
     await fetchSinglePlayer(playerId);
-  }});
+  }
+});
 
+// SUBMIT THE FORM TO CREATE A NEW PUPPY
+app.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (event.target.id === "puppyForm") {
+    const formData = new FormData(event.target);
+
+    const newPlayer = {
+      name: formData.get("name"),
+      breed: formData.get("breed"),
+    };
+
+    await addNewPlayer(newPlayer);
+  }
+});
+
+// CLICK THE DELETE BUTTON TO REMOVE A PUPPY
 app.addEventListener("click", async (event) => {
-  if(event.target.closest(".puppy")) {
-    const puppyDiv = event.target.closest(".puppy");
-    const playerId = puppyDiv.dataset.playerId;
-    await fetchSinglePlayer(playerId);
-  }});
+  if (event.target.id === "deleteButton") {
+    const playerId = event.target.dataset.playerid;
+    await removePlayer(playerId);
+  }
+});
 
 
 
