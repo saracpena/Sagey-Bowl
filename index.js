@@ -145,21 +145,30 @@ const removePlayer = async (playerId) => {
  */
 const render = () => {
   app.innerHTML = `
-  <h1>Puppy Bowl</h1>
-  
-  <main>
-    <section>
-      <h2>Add a Puppy</h2>
-
-      <form>
-        <input />
-        <input />
-        <input />
-      </form>
-    </section>
-
+    <h1>Puppy Bowl</h1>
     
-  </main>
+    <main>
+      <section>
+        <h2>Add a Puppy</h2>
+
+        <form id="puppyForm">
+          <input name="name" placeholder="Name" required/>
+          <input name="breed" placeholder="Breed" required/>
+          <button>Add Puppy</button>
+        </form>
+      </section>
+
+      <section>
+        <h2></h2>
+
+        <div>
+          ---mapping here---
+            return `
+              <>
+            `
+        </div>
+      </section>
+    </main>
   `
 };
 
