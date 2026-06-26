@@ -204,8 +204,8 @@ const removePlayer = async (playerId) => {
 
 // CLICK A PUPPY TO VIEW DETAILS
 app.addEventListener("click", async (event) => {
-  if (event.target.contains(".puppy")) {
-    const puppyDiv = event.target.contains(".puppy");
+  if (event.target.classList.contains("puppy")) {
+    const puppyDiv = event.target.classList.contains("puppy");
     const playerId = puppyDiv.dataset.playerid;
     await fetchSinglePlayer(playerId);
   }
