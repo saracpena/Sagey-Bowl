@@ -61,7 +61,7 @@ const render = () => {
       </section>
 
       <section>
-        <h2>Puppy List</h2>
+        <h2 class="sectionTitle">Puppy List</h2>
 
           <div id="puppyList">
             ${puppies

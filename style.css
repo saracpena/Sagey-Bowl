@@ -30,6 +30,10 @@ section {
     flex: 1;
 }
 
+.sectionTitle {
+    text-align: center;
+}
+
 #puppyList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
