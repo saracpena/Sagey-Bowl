@@ -20,7 +20,8 @@
 //If you would like to, you can create a variable to store the API_URL here.
 //This is optional. if you do not want to, skip this and move on.
 
-const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
+const API_URL = 
+  "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
 
 /////////////////////////////
 /*This looks like a good place to declare any state or global variables you might need*/
@@ -28,7 +29,7 @@ const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
 ////////////////////////////
 
 let puppies = [];
-let selectedPuppies = null;
+let selectedPuppy = null;
 
 const app = document.querySelector("#app");
 
@@ -38,7 +39,14 @@ const app = document.querySelector("#app");
  * Instead, this function should be keeping our state up to date
  */
 const fetchAllPlayers = async () => {
-  
+  try {
+    const response = await fetch (API_URL);
+    const { data } = await response.json();
+    puppies = data.players;
+    render();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -52,7 +60,14 @@ const fetchAllPlayers = async () => {
  * Unless we know the id of the player we are trying to fetch, we cannot call fetchSinglePlayer()
  */
 const fetchSinglePlayer = async (playerId) => {
-  //TODO
+  try {
+    const response = await fetch (`${API_URL}/${playerId}`);
+    const { data } = await.response.json
+    selectedPuppy = data.player;
+    render();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -62,7 +77,7 @@ const fetchSinglePlayer = async (playerId) => {
  * @param {Object} newPlayer the player to add
  */
 /* Note: we need data from our user to be able to add a new player
- * What does that sound like we need?
+ * What does that sound like we need? An OBJECT
  */
 /**
  * Note#2: addNewPlayer() expects you to pass in a
@@ -71,7 +86,19 @@ const fetchSinglePlayer = async (playerId) => {
  */
 
 const addNewPlayer = async (newPlayer) => {
-  //TODO
+  try {
+    await fetch (API_URL,
+      {
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPlayer),
+      });
+    await fetchAllPlayers();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -86,7 +113,18 @@ const addNewPlayer = async (newPlayer) => {
  */
 
 const removePlayer = async (playerId) => {
-  //TODO
+  try {
+    await fetch (
+      `${API_URL}/${playerId}`, 
+      {
+        method: "DELETE",
+    }
+  );
+  selectedPuppy = null;
+  await fetchAllPlayers();
+} catch (error) {
+  console.log(error);
+}
 };
 
 /**
