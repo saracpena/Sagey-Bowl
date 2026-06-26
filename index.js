@@ -187,6 +187,7 @@ const render = () => {
                     <p>${selectedPuppy.breed}</p>
                     <p>${selectedPuppy.status}</p>
                     <p>${selectedPuppy.id}</p>
+                    <img src="${selectedPuppy.imageUrl}" alt="${selectedPuppy.name}"/>
                   `
               }
             </div>
