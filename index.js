@@ -1,12 +1,36 @@
 /*             Feel free to use this skeleton I have provided or delete everything and do your own thing!             */
 
+// TODO: LIST WORKFLOW
+//    1. State
+//    ↓
+//    2. Render
+//    ↓
+//    3. Fetch data
+//    ↓
+//    4. User events
+//    ↓
+//    5. Update state
+//    ↓
+//    6. Render again
+
+
+
+
+
 //If you would like to, you can create a variable to store the API_URL here.
 //This is optional. if you do not want to, skip this and move on.
+
+const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2605-SARAP/players"
 
 /////////////////////////////
 /*This looks like a good place to declare any state or global variables you might need*/
 
 ////////////////////////////
+
+let puppies = [];
+let selectedPuppies = null;
+
+const app = document.querySelector("#app");
 
 /**
  * Fetches all players from the API.
@@ -14,7 +38,7 @@
  * Instead, this function should be keeping our state up to date
  */
 const fetchAllPlayers = async () => {
-  //TODO
+  
 };
 
 /**
