@@ -55,6 +55,11 @@ const render = () => {
         <form id="puppyForm">
           <input name="name" placeholder="Name" required/>
           <input name="breed" placeholder="Breed" required/>
+          <label for="status">Status</label>
+            <select name="status" id="status">
+              <option value="bench">Bench  🪑</option>
+              <option value="field">Field  🏈</option>
+            </select>
           <button>Add Puppy</button>
         </form>
       </section>
@@ -93,10 +98,10 @@ const render = () => {
   <p>Select a puppy to learn more about them.</p>
 </div>`
                   : `
-                    <h3>${selectedPuppy.name}</h3>
-                    <p>${selectedPuppy.id}</p>
-                    <p>${selectedPuppy.breed}</p>
-                    <p>${selectedPuppy.status}</p>
+                    <h3>Name: ${selectedPuppy.name}</h3>
+                    <p>ID: ${selectedPuppy.id}</p>
+                    <p>Breed: ${selectedPuppy.breed}</p>
+                    <p> Status: ${selectedPuppy.status}</p>
                     <p>Team: ${
                       selectedPuppy.team
                         ? selectedPuppy.team.name
@@ -229,6 +234,7 @@ app.addEventListener("submit", async (event) => {
     const newPlayer = {
       name: formData.get("name"),
       breed: formData.get("breed"),
+      status: formData.get("status"),
     };
 
     await addNewPlayer(newPlayer);
